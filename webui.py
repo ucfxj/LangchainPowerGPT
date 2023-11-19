@@ -318,7 +318,6 @@ block_css = """.importantButton {
 
 webui_title = """
 # 🎉langchain-PowerGPT WebUI🎉
-# 👍 [https://github.com/imClumsyPanda/langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)
 """
 default_vs = get_vs_list()[0] if len(get_vs_list()) > 1 else "为空"
 init_message = f"""欢迎使用 langchain-ChatGLM Web UI！
