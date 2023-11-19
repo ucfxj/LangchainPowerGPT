@@ -317,8 +317,8 @@ block_css = """.importantButton {
 }"""
 
 webui_title = """
-# 🎉langchain-ChatGLM WebUI🎉
-👍 [https://github.com/imClumsyPanda/langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)
+# 🎉langchain-PowerGPT WebUI🎉
+# 👍 [https://github.com/imClumsyPanda/langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)
 """
 default_vs = get_vs_list()[0] if len(get_vs_list()) > 1 else "为空"
 init_message = f"""欢迎使用 langchain-ChatGLM Web UI！
@@ -344,6 +344,9 @@ with gr.Blocks(css=block_css, theme=gr.themes.Default(**default_theme_args)) as 
         ""), gr.State(
         model_status)
     gr.Markdown(webui_title)
+    github_banner_path = 'https://raw.githubusercontent.com/ucfxj/PowerGPT/main/pics/banner2.png'
+    gr.HTML(
+        f'<p align="center"><a href="https://github.com/ucfxj/PowerGPT"><img src={github_banner_path} width="700"/></a></p>')
     with gr.Tab("对话"):
         with gr.Row():
             with gr.Column(scale=10):
@@ -352,6 +355,13 @@ with gr.Blocks(css=block_css, theme=gr.themes.Default(**default_theme_args)) as 
                                      show_label=False).style(height=750)
                 query = gr.Textbox(show_label=False,
                                    placeholder="请输入提问内容，按回车进行提交").style(container=False)
+                # 添加一个发送按钮
+                send_button = gr.Button("发送")
+
+                # 修改 query.submit 调用，以响应按钮点击
+                send_button.click(get_answer,
+                                  [query, vs_path, chatbot],
+                                  [chatbot, query])
             with gr.Column(scale=5):
                 mode = gr.Radio(["LLM 对话", "知识库问答", "Bing搜索问答"],
                                 label="请选择使用模式",
@@ -434,6 +444,13 @@ with gr.Blocks(css=block_css, theme=gr.themes.Default(**default_theme_args)) as 
                                      show_label=False).style(height=750)
                 query = gr.Textbox(show_label=False,
                                    placeholder="请输入提问内容，按回车进行提交").style(container=False)
+                # 添加一个发送按钮
+                send_button = gr.Button("发送")
+
+                # 修改 query.submit 调用，以响应按钮点击
+                send_button.click(get_answer,
+                                  [query, vs_path, chatbot],
+                                  [chatbot, query])
             with gr.Column(scale=5):
                 mode = gr.Radio(["知识库测试"],  # "知识库问答",
                                 label="请选择使用模式",
